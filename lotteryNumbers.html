@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lottery Numbers</title>
+<meta charset="windows-1252">
+<head>
+<script>
+// this function picks five random numbers between 1 and 50 
+function pickNumbers(){
+	var min = 1;
+	var max = 50;
+	// generate a list of numbers between 1 and 50
+	var numbers = [...Array(max).keys()].map(i => min + i);
+	// array to store random numbers 
+	var randNums = []
+	
+	for(i=0;i<5;i++){
+		// while loop is used in case the same number get drawn twice 
+		while(true){	
+			// random number between 1 and 50 
+			var random = numbers[Math.floor(Math.random() * numbers.length)];
+			// if random number is not already in randNums then append it to the array and break out of while loop 
+			if(!randNums.includes(random)){
+				randNums.push(random);
+				break;
+			}
+		}
+	}
+	// variable to output the list of numbers as one string
+	var lottoNums = '';
+	// loop through each random number and append it to lottoNums followed by a comma 
+	for(i=0;i<randNums.length;i++){
+		lottoNums += randNums[i]
+		if(i < randNums.length-1){
+			lottoNums += ', ';
+		}
+	}
+	// set the text of the span to lottoNums
+	document.getElementById("lottonumbers").textContent = "Lottery Numbers are: " + lottoNums;
+}
+</script>
+</head>
+<body>
+<button onclick="pickNumbers()">Pick Numbers</button>
+<br><span id="lottonumbers"></span>
+</body>
+</html>
